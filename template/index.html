@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🛸 Alien Signal Analyzer</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🛸 Alien Signal Analyzer</h1>
+        <p class="subtitle">Enter a base-5 signal with exactly one '?'.</p>
+
+        <form method="POST">
+            <input type="text" name="signal" placeholder="e.g., 1 3 ? 4 or 1?34" required>
+            <button type="submit">Analyze Signal</button>
+        </form>
+
+        {% if steps %}
+            <div class="steps">
+                <h3>🔍 Step-by-Step Analysis:</h3>
+                <ul>
+                    {% for step in steps %}
+                        <li>{{ step }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        {% if result is not none %}
+            <div class="result">
+                {% if result != '-1' %}
+                    ✅ Correct digit to replace '?' is: <strong>{{ result }}</strong>
+                {% else %}
+                    ❌ No valid digit found to make it divisible by 7
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
